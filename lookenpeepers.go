@@ -10,7 +10,6 @@ import (
 	"time"
 
 	"github.com/rs/zerolog"
-	"go.mau.fi/util/exzerolog"
   "github.com/influxdata/influxdb-client-go/v2"
 
 	"maunium.net/go/mautrix"
@@ -41,14 +40,12 @@ func main() {
 		panic(err)
 	}
 
-	log := zerolog.New(zerolog.NewConsoleWriter(func(w *zerolog.ConsoleWriter) {
-		w.Out = rl.Stdout()
-		w.TimeFormat = time.Stamp
-	})).With().Timestamp().Logger()
-	if !*debug {
-		log = log.Level(zerolog.InfoLevel)
-	}
-	exzerolog.SetupDefaults(&log)
+  log := zerolog.New(os.Stdout)
+  zerolog.SetGlobalLevel(zerolog.InfoLevel)
+  if *debug {
+      zerolog.SetGlobalLevel(zerolog.DebugLevel)
+  }
+
 	client.Log = log
 
   influx_client := influxdb2.NewClient(*influxdb, *influxdb_token)
