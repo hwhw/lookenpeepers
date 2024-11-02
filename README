@@ -1,0 +1,3 @@
+Lookenpeepers is a matrix client (bot?) that will write active presence events to an InfluxDB database
+
+You should most probably not use this except for demonstrating that this can be easily done
