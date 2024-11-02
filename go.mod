@@ -1,4 +1,4 @@
-module lookenpeepers
+module github.com/hwhw/lookenpeepers
 
 go 1.22.2
 
